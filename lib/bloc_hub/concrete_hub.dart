@@ -1,5 +1,3 @@
-library;
-
 import '../communication_types/base_communication.dart';
 import 'bloc_member.dart';
 import 'hub.dart';

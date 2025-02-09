@@ -1,3 +1,3 @@
-## 1.0.1
+## 1.0.3
 
-* Update readme file.
+* Fix issue and edit dart support environment.
