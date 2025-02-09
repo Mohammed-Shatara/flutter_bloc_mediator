@@ -65,8 +65,11 @@ class _MyHomePageState extends State<MyHomePage> {
                       style:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
                     ),
-                    CounterText(otherName: "B",value: "${state.count}",otherValue: "${state.blocBCount}",)
-
+                    CounterText(
+                      otherName: "B",
+                      value: "${state.count}",
+                      otherValue: "${state.blocBCount}",
+                    )
                   ],
                 );
               },
@@ -81,9 +84,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   Text("Counter B:",
                       style:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
-                  CounterText(otherName: "A",value: "${state.count}",otherValue: "${state.blocACount}",)
-
-
+                  CounterText(
+                    otherName: "A",
+                    value: "${state.count}",
+                    otherValue: "${state.blocACount}",
+                  )
                 ],
               );
             },
@@ -109,7 +114,11 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 class CounterText extends StatelessWidget {
-  const CounterText({super.key, required this.value, required this.otherValue, required this.otherName});
+  const CounterText(
+      {super.key,
+      required this.value,
+      required this.otherValue,
+      required this.otherName});
 
   final String value;
   final String otherValue;
@@ -117,28 +126,26 @@ class CounterText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  RichText(
+    return RichText(
         text: TextSpan(
             text: "My Value is: ",
             style: TextStyle(fontSize: 14, color: Colors.black),
             children: [
-              TextSpan(
-                  text: value,
-                  style: TextStyle(fontSize: 14,fontWeight: FontWeight.w600)),
-              TextSpan(
-                  text: ", while Counter",
-                  style:
-                  TextStyle(fontSize: 14, color: Colors.black)),
-              TextSpan(
-                  text: " $otherName ",
-                  style: TextStyle(fontSize: 14,fontWeight: FontWeight.w600)),
-              TextSpan(
-                  text: "value is: ",
-                  style:
-                  TextStyle(fontSize: 14, color: Colors.black)),
-              TextSpan(
-                  text: otherValue,
-                  style: TextStyle(fontSize: 14,fontWeight: FontWeight.w600))
-            ]));
+          TextSpan(
+              text: value,
+              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
+          TextSpan(
+              text: ", while Counter",
+              style: TextStyle(fontSize: 14, color: Colors.black)),
+          TextSpan(
+              text: " $otherName ",
+              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
+          TextSpan(
+              text: "value is: ",
+              style: TextStyle(fontSize: 14, color: Colors.black)),
+          TextSpan(
+              text: otherValue,
+              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600))
+        ]));
   }
 }

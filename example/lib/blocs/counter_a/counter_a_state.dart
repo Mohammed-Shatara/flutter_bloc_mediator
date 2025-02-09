@@ -5,10 +5,10 @@ class CounterAState {
   final int count;
   final int blocBCount;
 
- const CounterAState({ this.count = 0,  this.blocBCount = 0});
+  const CounterAState({this.count = 0, this.blocBCount = 0});
 
   CounterAState copyWith({int? count, int? blocBCount}) {
-    return CounterAState(count: count?? this.count, blocBCount:blocBCount?? this.blocBCount);
+    return CounterAState(
+        count: count ?? this.count, blocBCount: blocBCount ?? this.blocBCount);
   }
 }
-

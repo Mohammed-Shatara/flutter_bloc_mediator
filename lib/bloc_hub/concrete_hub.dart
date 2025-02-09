@@ -10,8 +10,8 @@ class ConcreteHub extends BlocHub {
 
   @override
   List<Member> getMembers() =>
-      _blocMembersMap.entries.map((entry) => entry.value).toList() as List<Member>;
-
+      _blocMembersMap.entries.map((entry) => entry.value).toList()
+          as List<Member>;
 
   @override
   void sendToAll(String senderName, CommunicationType data) {
@@ -25,12 +25,10 @@ class ConcreteHub extends BlocHub {
     }
   }
 
-
   @override
   void sendToByName(
       String senderName, CommunicationType data, String receiverName) {
-
-    if(_blocMembersMap.containsKey(receiverName)) {
+    if (_blocMembersMap.containsKey(receiverName)) {
       _blocMembersMap[receiverName].receive(senderName, data);
     }
     return;

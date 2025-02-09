@@ -1,3 +1,1 @@
-abstract class CommunicationType{
-
-}
+abstract class CommunicationType {}

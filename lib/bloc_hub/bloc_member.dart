@@ -1,11 +1,9 @@
-
-
 import '../communication_types/base_communication.dart';
 import 'hub.dart';
 
 mixin BlocMember {
- late BlocHub blocHub;
- late String name;
+  late BlocHub blocHub;
+  late String name;
 
   void receive(String from, CommunicationType data);
 

@@ -1,4 +1,3 @@
-
 import 'bloc_member.dart';
 
 class Member {

@@ -7,10 +7,10 @@ import 'counter_b/counter_b_bloc.dart';
 
 final locator = GetIt.instance;
 
-void setUpLocator()  {
+void setUpLocator() {
   locator.registerLazySingleton<BlocHub>(() => ConcreteHub());
-  locator.registerLazySingleton(()=>CounterABloc());
-  locator.registerLazySingleton(()=>CounterBBloc());
+  locator.registerLazySingleton(() => CounterABloc());
+  locator.registerLazySingleton(() => CounterBBloc());
   locator<BlocHub>().registerByName(locator<CounterABloc>(), 'CounterABloc');
   locator<BlocHub>().registerByName(locator<CounterBBloc>(), 'CounterBBloc');
 }
