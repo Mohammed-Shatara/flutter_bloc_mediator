@@ -1,3 +1,3 @@
-## 1.0.3
+## 1.0.4
 
-* Fix issue and edit dart support environment.
+* Update License.
