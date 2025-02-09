@@ -3,6 +3,8 @@ description: "A Flutter package enabling message delegation between BLoCs using 
 version: 1.0.4
 homepage: https://github.com/Mohammed-Shatara/flutter_bloc_mediator
 repository: https://github.com/Mohammed-Shatara/flutter_bloc_mediator
+license: MIT
+
 environment:
   sdk: ">=2.14.0 <4.0.0"
   flutter: ">=1.17.0"
