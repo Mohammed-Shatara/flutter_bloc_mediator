@@ -1,5 +1,5 @@
 name: flutter_bloc_mediator
-description: "A Flutter package that enables message delegation between BLoCs using the Mediator pattern. flutter_bloc_mediator allows BLoCs to communicate without direct references, improving modularity, maintainability, and testability. 🚀"
+description: "A Flutter package that enables message delegation between BLoCs using the Mediator pattern. flutter_bloc_mediator allows BLoCs to communicate without direct references, improving modularity, maintainability, and testability."
 version: 1.0.0
 homepage:
 
