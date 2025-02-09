@@ -1,4 +1,4 @@
-import 'package:example/blocs/locator.dart';
+import 'package:example/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'blocs/counter_a/counter_a_bloc.dart';

@@ -3,7 +3,7 @@ import 'package:flutter_bloc_mediator/bloc_hub/concrete_hub.dart';
 import 'package:flutter_bloc_mediator/bloc_hub/hub.dart';
 import 'package:get_it/get_it.dart';
 
-import 'counter_b/counter_b_bloc.dart';
+import 'blocs/counter_b/counter_b_bloc.dart';
 
 final locator = GetIt.instance;
 
