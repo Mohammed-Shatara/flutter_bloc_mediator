@@ -1,13 +1,13 @@
 name: flutter_bloc_mediator
 description: "A Flutter package enabling message delegation between BLoCs using the Mediator pattern, improving modularity, maintainability, and testability."
-version: 1.0.4
-homepage: https://github.com/Mohammed-Shatara/flutter_bloc_mediator
+version: 1.0.5
+homepage: https://github.com/Mohammed-Shatara
 repository: https://github.com/Mohammed-Shatara/flutter_bloc_mediator
+issue_tracker: https://github.com/Mohammed-Shatara/flutter_bloc_mediator/issues
 license: MIT
 
 environment:
   sdk: ">=2.14.0 <4.0.0"
-  flutter: ">=1.17.0"
 
 dependencies:
   flutter:
