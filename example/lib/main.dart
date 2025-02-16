@@ -1,15 +1,14 @@
-import 'package:example/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_bloc_mediator/bloc_hub/hub.dart';
+import 'package:flutter_bloc_mediator/bloc_hub/concrete_hub.dart';
 import 'package:flutter_bloc_mediator/bloc_hub/provider.dart';
 import 'blocs/counter_a/counter_a_bloc.dart';
 import 'blocs/counter_b/counter_b_bloc.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  setUpLocator();
-  runApp(BlocHubProvider(blocHub: locator<BlocHub>(), child: MyApp()));
+  final blocHub = ConcreteHub();
+  runApp(BlocHubProvider(blocHub: blocHub, child: MyApp()));
 }
 
 class MyApp extends StatefulWidget {
