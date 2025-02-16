@@ -56,10 +56,19 @@ class CounterComType extends CommunicationType {
 }
 ```
 
-### 2. Create a `ConcreteHub` instance
+### 2. Create a `ConcreteHub` instance with `BlocHubProvider`
 
 ```dart
-final blocHub = ConcreteHub();
+void main() {
+  final blocHub = ConcreteHub();
+
+  runApp(
+    BlocHubProvider(
+      blocHub: blocHub,
+      child: MyApp(),
+    ),
+  );
+}
 ```
 
 ### 3. Register BLoCs with unique names
@@ -72,16 +81,91 @@ blocHub.registerByName(counterBlocA, 'CounterA');
 blocHub.registerByName(counterBlocB, 'CounterB');
 ```
 
-### 4. Send messages between BLoCs
+### 4. Local Bloc Usage
+
+For local bloc usage:
 
 ```dart
-// Inside CounterA bloc
-void _incrementCounter(CounterComType event, Emitter<CounterState> emit) {
-  sendTo(CounterComType(2), 'CounterB');
+final CounterABloc aBloc = CounterABloc();
+final CounterBBloc bBloc = CounterBBloc();
+
+void setBlocMembers(BuildContext context) {
+  BlocHubProvider.of(context).registerByName(aBloc, "CounterABloc");
+  BlocHubProvider.of(context).registerByName(bBloc, "CounterBBloc");
 }
-// OR
-counterBlocA.sendTo(CounterComType(2), 'CounterB');
-counterBlocB.sendToAll(CounterComType(2));
+
+@override
+void didChangeDependencies() {
+  setBlocMembers(context);
+  super.didChangeDependencies();
+}
+
+@override
+void dispose() {
+  BlocHubProvider.of(context).removeByName("CounterABloc");
+  super.dispose();
+}
+```
+
+### 5. Global Bloc Usage
+
+For global bloc usage:
+
+```dart
+final CounterABloc aBloc = CounterABloc();
+final CounterBBloc bBloc = CounterBBloc();
+
+void setBlocMembers(BuildContext context) {
+  BlocHubProvider.of(context).registerByName(aBloc, "CounterABloc");
+  BlocHubProvider.of(context).registerByName(bBloc, "CounterBBloc");
+}
+
+@override
+void didChangeDependencies() {
+  setBlocMembers(context);
+  super.didChangeDependencies();
+}
+
+MultiBlocProvider(
+  providers: [
+    BlocProvider<CounterABloc>(create: (context) => aBloc,),
+    BlocProvider<CounterBBloc>(create: (context) => bBloc,)
+  ],
+  child: MaterialApp(
+    title: 'Flutter Bloc Mediator Demo',
+    theme: ThemeData(
+      colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+      useMaterial3: true,
+    ),
+    home: const MyHomePage(),
+  ),
+);
+```
+
+### 6. Managing BlocHub Instances
+
+You can access the `BlocHub` instance using:
+
+```dart
+BlocHubProvider.of(context)
+```
+
+To register a new member:
+
+```dart
+BlocHubProvider.of(context).registerByName(aBloc, "CounterABloc");
+```
+
+To remove a registered bloc by name:
+
+```dart
+BlocHubProvider.of(context).removeByName("CounterABloc");
+```
+
+To clear all registered bloc members:
+
+```dart
+BlocHubProvider.of(context).clear();
 ```
 
 ### Example Output

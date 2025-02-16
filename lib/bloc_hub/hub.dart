@@ -33,6 +33,35 @@ abstract class BlocHub {
   /// Once registered, the BLoC can send and receive messages through the hub.
   void registerByName(BlocMember member, String name);
 
+  /// Removes a registered BLoC from the hub by its name.
+  ///
+  /// - [name]: The unique identifier of the BLoC to remove.
+  ///
+  /// If the BLoC is not found, no action is taken.
+  void removeByName(String name);
+
+  /// Clears all registered BLoC members from the hub.
+  ///
+  /// This method removes all entries, effectively resetting the hub.
+  void clearMembers();
+
+  /// Checks whether the hub has no registered members.
+  ///
+  /// Returns `true` if there are no members in the hub, otherwise `false`.
+  bool get isEmpty;
+
+  /// Checks whether the hub contains at least one registered member.
+  ///
+  /// Returns `true` if at least one member is registered, otherwise `false`.
+  bool get isNotEmpty;
+
+  /// Checks if a member with the given name exists in the hub.
+  ///
+  /// - [name]: The unique identifier of the BLoC to check.
+  ///
+  /// Returns `true` if the BLoC is registered, otherwise `false`.
+  bool hasMember(String name);
+
   /// Sends a message from one BLoC to all other registered BLoCs.
   ///
   /// - [senderName]: The name of the sender BLoC.

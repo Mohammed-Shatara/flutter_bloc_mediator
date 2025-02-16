@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 import '../communication_types/base_communication.dart';
 import 'bloc_member.dart';
 import 'hub.dart';
@@ -44,4 +46,34 @@ class ConcreteHub extends BlocHub {
 
     _blocMembersMap[name] = member;
   }
+
+  @override
+  void removeByName(String name) {
+    _blocMembersMap.remove(name);
+  }
+
+  @override
+  void clearMembers() {
+    _blocMembersMap.clear();
+  }
+
+  @override
+  bool get isEmpty => _blocMembersMap.isEmpty;
+
+  @override
+  bool hasMember(String name) {
+    return _blocMembersMap.containsKey(name);
+  }
+
+  @override
+  bool get isNotEmpty => _blocMembersMap.isNotEmpty;
+
+  @override
+  bool operator ==(Object other) {
+    return (other is ConcreteHub) &&
+        mapEquals(other._blocMembersMap, _blocMembersMap);
+  }
+
+  @override
+  int get hashCode => _blocMembersMap.hashCode;
 }

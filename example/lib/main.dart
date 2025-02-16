@@ -1,27 +1,58 @@
 import 'package:example/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_bloc_mediator/bloc_hub/hub.dart';
+import 'package:flutter_bloc_mediator/bloc_hub/provider.dart';
 import 'blocs/counter_a/counter_a_bloc.dart';
 import 'blocs/counter_b/counter_b_bloc.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   setUpLocator();
-  runApp(const MyApp());
+  runApp(BlocHubProvider(blocHub: locator<BlocHub>(), child: MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  final CounterABloc aBloc = CounterABloc();
+  final CounterBBloc bBloc = CounterBBloc();
+
+  void setBlocMembers(BuildContext context) {
+    BlocHubProvider.of(context).registerByName(aBloc, "CounterABloc");
+    BlocHubProvider.of(context).registerByName(bBloc, "CounterBBloc");
+  }
+
+  @override
+  void didChangeDependencies() {
+    setBlocMembers(context);
+    super.didChangeDependencies();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Bloc Mediator Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<CounterABloc>(
+          create: (context) => aBloc,
+        ),
+        BlocProvider<CounterBBloc>(
+          create: (context) => bBloc,
+        )
+      ],
+      child: MaterialApp(
+        title: 'Flutter Bloc Mediator Demo',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
+        ),
+        home: const MyHomePage(),
       ),
-      home: const MyHomePage(),
     );
   }
 }
@@ -34,12 +65,12 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  void _incrementCounterA() {
-    locator<CounterABloc>().add(IncrementAEvent());
+  void _incrementCounterA(BuildContext context) {
+    BlocProvider.of<CounterABloc>(context).add(IncrementAEvent());
   }
 
-  void _incrementCounterB() {
-    locator<CounterBBloc>().add(IncrementBEvent());
+  void _incrementCounterB(BuildContext context) {
+    BlocProvider.of<CounterBBloc>(context).add(IncrementBEvent());
   }
 
   @override
@@ -55,7 +86,6 @@ class _MyHomePageState extends State<MyHomePage> {
           Padding(
             padding: const EdgeInsets.only(top: 48.0),
             child: BlocBuilder<CounterABloc, CounterAState>(
-              bloc: locator<CounterABloc>(),
               builder: (context, state) {
                 return Column(
                   spacing: 8,
@@ -76,7 +106,6 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
           BlocBuilder<CounterBBloc, CounterBState>(
-            bloc: locator<CounterBBloc>(),
             builder: (context, state) {
               return Column(
                 spacing: 8,
@@ -98,11 +127,11 @@ class _MyHomePageState extends State<MyHomePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               ElevatedButton(
-                onPressed: _incrementCounterA,
+                onPressed: () => _incrementCounterA(context),
                 child: Text("Increment A"),
               ),
               ElevatedButton(
-                onPressed: _incrementCounterB,
+                onPressed: () => _incrementCounterB(context),
                 child: Text("Increment B"),
               )
             ],
