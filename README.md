@@ -103,6 +103,7 @@ void didChangeDependencies() {
 @override
 void dispose() {
   BlocHubProvider.of(context).removeByName("CounterABloc");
+  BlocHubProvider.of(context).removeByName("CounterBBloc");
   super.dispose();
 }
 ```
