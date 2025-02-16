@@ -13,4 +13,12 @@ class Member {
 
   /// Creates a [Member] with a given [name] and associated BLoC [child].
   Member(this.name, this.child);
+
+  @override
+  bool operator ==(Object other) {
+    return (other is Member) && other.name == name;
+  }
+
+  @override
+  int get hashCode => name.hashCode;
 }
