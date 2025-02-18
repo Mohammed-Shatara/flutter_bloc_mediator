@@ -1,39 +1,47 @@
 # Flutter Bloc Mediator
 
-## Overview
+[![Pub Version](https://img.shields.io/pub/v/flutter_bloc_mediator)](https://pub.dev/packages/flutter_bloc_mediator)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Flutter Version](https://img.shields.io/badge/flutter-%3E%3D2.0-blue)](https://flutter.dev)
 
-`flutter_bloc_mediator` is a Flutter package that facilitates message delegation between BLoCs using the Mediator pattern. This package enables BLoCs to communicate without requiring direct references to each other, promoting better modularity and separation of concerns.
+`flutter_bloc_mediator` is a Flutter package that facilitates **message delegation between BLoCs using the Mediator pattern**. This allows BLoCs to communicate **without direct references**, improving modularity and maintainability.
 
-## Problem Statement
+---
 
-In traditional Flutter applications using `flutter_bloc`, BLoCs often need to communicate with each other. The common approaches to solving this problem include:
+## 🚀 Why Use This Package?
 
-1. **Direct Dependencies:** A BLoC holds a reference to another BLoC instance, leading to tight coupling and making unit testing harder.
-2. **Event Subscription:** Using event buses or streams, which can become difficult to manage as the application grows.
-3. **Global State Management Solutions:** While effective, these can introduce unnecessary complexity for simple communication needs.
+### 🛑 Common Problems with BLoC Communication:
 
-### Solution
+1. **Direct Dependencies:** BLoCs referencing each other lead to tight coupling and reduced testability.
+2. **Event Buses/Streams:** Can be complex and hard to manage in large applications.
+3. **Global State Management:** Often introduces unnecessary complexity.
 
-The `flutter_bloc_mediator` package implements the **Mediator Pattern** to decouple BLoCs. Instead of referencing other BLoCs directly, each BLoC registers itself to a `BlocHub` and can send messages to other BLoCs using their registered names.
+### ✅ Solution: The Mediator Pattern
 
-## Installation
+Instead of BLoCs directly referencing each other, they register themselves with a **`BlocHub`** and communicate using **message passing**.
 
-Add the dependency to your `pubspec.yaml` file:
+---
+
+## 📦 Installation
+
+Add the package to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
   flutter_bloc_mediator: latest_version
 ```
 
-Then, run:
+Then, install the package:
 
 ```sh
 flutter pub get
 ```
 
-## Usage
+---
 
-### 1. Define a BLoC using `BlocMember` mixin
+## 🛠 Usage
+
+### 1️⃣ Define a BLoC using `BlocMember`
 
 ```dart
 import 'package:flutter_bloc_mediator/flutter_bloc_mediator.dart';
@@ -51,12 +59,14 @@ class CounterBloc with BlocMember {
 }
 
 class CounterComType extends CommunicationType {
-  final int data;
-  CounterComType(this.data);
+  final int value;
+  CounterComType(this.value);
 }
 ```
 
-### 2. Create a `ConcreteHub` instance with `BlocHubProvider`
+---
+
+### 2️⃣ Create a `BlocHub` with `BlocHubProvider`
 
 ```dart
 void main() {
@@ -71,7 +81,9 @@ void main() {
 }
 ```
 
-### 3. Register BLoCs with unique names
+---
+
+### 3️⃣ Register BLoCs in the `BlocHub` with unique names
 
 ```dart
 final counterBlocA = CounterBloc();
@@ -81,9 +93,9 @@ blocHub.registerByName(counterBlocA, 'CounterA');
 blocHub.registerByName(counterBlocB, 'CounterB');
 ```
 
-### 4. Local Bloc Usage
+---
 
-For local bloc usage:
+### 4️⃣ Local Bloc Usage
 
 ```dart
 final CounterABloc aBloc = CounterABloc();
@@ -95,9 +107,11 @@ void setBlocMembers(BuildContext context) {
 }
 
 @override
-void didChangeDependencies() {
-  setBlocMembers(context);
-  super.didChangeDependencies();
+void initState() {
+  WidgetsBinding.instance.addPostFrameCallback((_) {
+    setBlocMembers(context);
+  });
+  super.initState();
 }
 
 @override
@@ -108,9 +122,9 @@ void dispose() {
 }
 ```
 
-### 5. Global Bloc Usage
+---
 
-For global bloc usage:
+### 5️⃣ Global Bloc Usage with `MultiBlocProvider`
 
 ```dart
 final CounterABloc aBloc = CounterABloc();
@@ -122,9 +136,11 @@ void setBlocMembers(BuildContext context) {
 }
 
 @override
-void didChangeDependencies() {
-  setBlocMembers(context);
-  super.didChangeDependencies();
+void initState() {
+  WidgetsBinding.instance.addPostFrameCallback((_) {
+    setBlocMembers(context);
+  });
+  super.initState();
 }
 
 MultiBlocProvider(
@@ -143,49 +159,60 @@ MultiBlocProvider(
 );
 ```
 
-### 6. Managing BlocHub Instances
+---
 
-You can access the `BlocHub` instance using:
+### 6️⃣ Managing `BlocHub` Instances
+
+Access the `BlocHub` instance:
 
 ```dart
 BlocHubProvider.of(context)
 ```
 
-To register a new member:
+Register a new BLoC:
 
 ```dart
 BlocHubProvider.of(context).registerByName(aBloc, "CounterABloc");
 ```
 
-To remove a registered bloc by name:
+Remove a registered BLoC:
 
 ```dart
 BlocHubProvider.of(context).removeByName("CounterABloc");
 ```
 
-To clear all registered bloc members:
+Clear all registered BLoCs:
 
 ```dart
 BlocHubProvider.of(context).clear();
 ```
 
-### Example Output
+---
+
+## 📌 Example Output
 
 ```
 CounterB received increment event from CounterA: Counter = 1
 CounterA received increment event from CounterB: Counter = 2
 ```
 
-## Benefits
+---
 
-- **Loose Coupling:** BLoCs do not need direct references to each other.
-- **Better Maintainability:** Communication logic is centralized in `BlocHub`.
-- **Improved Testability:** Individual BLoCs can be tested in isolation without worrying about dependencies.
+## 🎯 Key Benefits
 
-## Contributing
+✅ **Loose Coupling:** BLoCs don’t need direct references to each other.\
+✅ **Better Maintainability:** Centralized communication logic in `BlocHub`.\
+✅ **Improved Testability:** Easily test individual BLoCs in isolation.
 
-Contributions are welcome! Feel free to open an issue or submit a pull request.
+---
 
-## License
+## 🤝 Contributing
 
-This package is released under the MIT License.
+Contributions are welcome! If you have ideas for improvements or find issues, feel free to open an issue or submit a pull request.
+
+---
+
+## 📜 License
+
+This package is released under the **MIT License**.
+

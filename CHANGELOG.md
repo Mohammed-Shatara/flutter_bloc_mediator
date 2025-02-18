@@ -1,3 +1,7 @@
+# 1.1.1
+## Improved
+- Enhanced `README.md` Readability
+
 # 1.1.0
 ## Added
 - Introduced `BlocHubProvider` for easier BlocHub instance management.

@@ -28,9 +28,11 @@ class _MyAppState extends State<MyApp> {
   }
 
   @override
-  void didChangeDependencies() {
-    setBlocMembers(context);
-    super.didChangeDependencies();
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      setBlocMembers(context);
+    });
+    super.initState();
   }
 
   @override
