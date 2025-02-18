@@ -161,6 +161,20 @@ MultiBlocProvider(
 
 ---
 
+### 5️⃣ Send messages between BLoCs
+
+```dart
+// Inside CounterA bloc
+void _incrementCounter(CounterComType event, Emitter<CounterState> emit) {
+  sendTo(CounterComType(2), 'CounterB');
+}
+// OR
+counterBlocA.sendTo(CounterComType(2), 'CounterB');
+counterBlocB.sendToAll(CounterComType(2));
+```
+
+---
+
 ### 6️⃣ Managing `BlocHub` Instances
 
 Access the `BlocHub` instance:
