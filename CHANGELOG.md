@@ -1,9 +1,9 @@
 # 1.1.2
-- Minor Enhancements
+- Minor Enhancements.
 
 # 1.1.1
 ## Improved
-- Enhanced `README.md` Readability
+- Enhanced `README.md` Readability.
 
 # 1.1.0
 ## Added
@@ -20,8 +20,24 @@
 
 # 1.0.5
 
-* Comprehensive documentation for all core classes
+* Comprehensive documentation for all core classes.
 
 # 1.0.4
 
-* Update License.
+* Updated License.
+
+# 1.0.3
+
+* Minor Updates.
+
+# 1.0.2
+
+* Updated Dart SDK compatibility to 2.14.
+
+# 1.0.1
+
+* Minor Updates.
+
+# 1.0.0
+
+* Initial Version of the library.
