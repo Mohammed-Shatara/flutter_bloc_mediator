@@ -1,3 +1,6 @@
+# 1.1.2
+- Minor Enhancements
+
 # 1.1.1
 ## Improved
 - Enhanced `README.md` Readability

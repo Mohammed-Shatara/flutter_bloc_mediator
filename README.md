@@ -53,6 +53,10 @@ class CounterBloc with BlocMember {
   void receive(String from, CommunicationType data) {
     if (data is CounterComType) {
       counter += data.value;
+      
+      // You can add new Event
+      add(IncrementBlocBEvent(count: counter));
+      
       print('$name received increment event from $from: Counter = $counter');
     }
   }
